@@ -4,6 +4,7 @@ import ProfileScreen from "./screens/Profile";
 import PasswordsScreen from "./screens/Passwords";
 import GeneratePasswordScreen from "./screens/GeneratePassword";
 import RegistrationScreen from "./screens/RegistrationScreen";
+import LoginScreen from "./screens/LoginScreen";
 const Stack = createNativeStackNavigator()
 
 export default function App() {
@@ -25,6 +26,10 @@ export default function App() {
                 <Stack.Screen
                     name={'Registraion'}
                     component={RegistrationScreen}
+                />
+                <Stack.Screen
+                    name={'Login'}
+                    component={LoginScreen}
                 />
 
             </Stack.Navigator>

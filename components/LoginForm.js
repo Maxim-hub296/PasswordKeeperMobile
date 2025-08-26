@@ -3,38 +3,21 @@ import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert} from "react-
 import {useNavigation} from "@react-navigation/native";
 import {login} from "../utils/auth";
 
-export default function RegistrationForm() {
+export default function LoginForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+
+
     const navigation = useNavigation()
 
-    const data = {
-        username: username,
-        password: password,
+    const handleLogin = () => {
+        login({username, password}, navigation)
     }
-
-
-    const handleRegister = () => {
-        fetch('http://192.168.88.19:8000/api/registration/', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        })
-            .then(res => {
-                if (!res.ok) {
-                    Alert.alert('Регистрация не удалась', "Пользователь с таким именем уже существует\nИли имя пользователя содержит пробелы")
-                    console.error(`Ошибка регистрации`)
-                    return;
-                }
-                login({username, password}, navigation)
-                navigation.navigate('Profile')
-            })
-
-    };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Регистрация</Text>
+            <Text style={styles.title}>Вход</Text>
 
             <TextInput
                 style={styles.input}
@@ -43,7 +26,6 @@ export default function RegistrationForm() {
                 value={username}
                 onChangeText={setUsername}
             />
-
 
             <TextInput
                 style={styles.input}
@@ -54,8 +36,8 @@ export default function RegistrationForm() {
                 onChangeText={setPassword}
             />
 
-            <TouchableOpacity style={styles.button} onPress={handleRegister}>
-                <Text style={styles.buttonText}>Зарегистрироваться</Text>
+            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                <Text style={styles.buttonText}>Войти</Text>
             </TouchableOpacity>
         </View>
     );
